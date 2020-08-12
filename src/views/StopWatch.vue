@@ -1,20 +1,20 @@
 <template>
-  <div>
+  <v-container class="text-center">
     <h2>StopWatch</h2>
-    <h1>{{countTime.toLocaleString()}}</h1>
+    <h1>{{countTime.toFixed(2)}}</h1>
     <div v-show="!isStart">
-      <v-btn @click="start" color="primary">Start</v-btn>
-      <v-btn @click="clear">Clear</v-btn>
+      <v-btn class="ma-2" @click="start" color="primary">Start</v-btn>
+      <v-btn class="ma-2" @click="clear">Clear</v-btn>
     </div>
     <div v-show="isStart">
-      <v-btn @click="stop" color="primary">Stop</v-btn>
-      <v-btn @click="lap">Lap</v-btn>
+      <v-btn class="ma-2" @click="stop" color="primary">Stop</v-btn>
+      <v-btn class="ma-2" @click="lap">Lap</v-btn>
     </div>
     <p
       v-for="(lapTime) in reverseLapTimes"
       :key="lapTime.id"
-    >{{lapTime.id+" "+lapTime.lap.toLocaleString()+" + "+lapTime.diff.toLocaleString()}}</p>
-  </div>
+    >{{lapTime.id+" "+lapTime.lap.toFixed(2)+" + "+lapTime.diff.toLocaleString()}}</p>
+  </v-container>
 </template>
 
 <script lang="ts">

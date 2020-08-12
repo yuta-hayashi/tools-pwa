@@ -1,20 +1,28 @@
 <template>
-  <div>
+  <v-container>
     <h2>Timer</h2>
     <h1>{{countTime.toLocaleString()}}</h1>
-    <div v-show="!isStart">
-      <v-btn @click="start" color="primary">Start</v-btn>
-      <v-btn @click="clear">Clear</v-btn>
-    </div>
-    <div v-show="isStart">
-      <v-btn @click="stop" color="primary">Stop</v-btn>
-    </div>
-    <br />
-    {{times}}
-    <v-text-field type="number" label="Hour" outlined v-model.number="times[0]"></v-text-field>
-    <v-text-field type="number" label="Minitus" outlined v-model.number="times[1]"></v-text-field>
-    <v-text-field type="number" label="Seconds" outlined v-model.number="times[2]"></v-text-field>
-  </div>
+    <v-row>
+      <v-col v-show="!isStart">
+        <v-btn class="ma-2" @click="start" color="primary">Start</v-btn>
+        <v-btn class="ma-2" @click="clear">Clear</v-btn>
+      </v-col>
+      <v-col v-show="isStart">
+        <v-btn class="ma-2" @click="stop" color="primary">Stop</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-text-field type="number" label="Hour" outlined v-model.number="times[0]"></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field type="number" label="Minitus" outlined v-model.number="times[1]"></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field type="number" label="Seconds" outlined v-model.number="times[2]"></v-text-field>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
