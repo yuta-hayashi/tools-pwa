@@ -1,5 +1,9 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "b9dfec24f698e3aa5efd004cfd494ad1",
+    "url": "/404.html"
+  },
+  {
     "revision": "0f607c6b5555ff6fa0a71148716ea707",
     "url": "/alarm.mp3"
   },
