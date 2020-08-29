@@ -5,10 +5,8 @@
     <v-row>
       <v-col v-show="!isStart">
         <v-btn class="ma-2" @click="start" color="primary">Start</v-btn>
-        <v-btn class="ma-2" @click="clear">Clear</v-btn
-        ><v-btn v-if="!hasPush" class="ma-2" @click="allowPush"
-          >Allow Push</v-btn
-        >
+        <v-btn class="ma-2" @click="clear">Clear</v-btn>
+        <v-btn v-if="!hasPush" class="ma-2" @click="allowPush">Allow Push</v-btn>
       </v-col>
       <v-col v-show="isStart">
         <v-btn class="ma-2" @click="stop" color="primary">Stop</v-btn>
@@ -16,30 +14,23 @@
     </v-row>
     <v-row>
       <v-col>
-        <v-text-field
-          type="number"
-          label="Hour"
-          outlined
-          v-model.number="times[0]"
-        ></v-text-field>
+        <v-text-field type="number" label="Hour" outlined v-model.number="times[0]"></v-text-field>
       </v-col>
       <v-col>
-        <v-text-field
-          type="number"
-          label="Minitus"
-          outlined
-          v-model.number="times[1]"
-        ></v-text-field>
+        <v-text-field type="number" label="Minitus" outlined v-model.number="times[1]"></v-text-field>
       </v-col>
       <v-col>
-        <v-text-field
-          type="number"
-          label="Seconds"
-          outlined
-          v-model.number="times[2]"
-        ></v-text-field>
+        <v-text-field type="number" label="Seconds" outlined v-model.number="times[2]"></v-text-field>
       </v-col>
     </v-row>
+    <div class="text-center ma-2">
+      <v-snackbar v-model="snackbar">
+        {{ message }}
+        <template v-slot:action="{ attrs }">
+          <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">Close</v-btn>
+        </template>
+      </v-snackbar>
+    </div>
   </v-container>
 </template>
 
@@ -55,14 +46,21 @@ export default class Timer extends Vue {
   intervalId = 0;
   isStart = false;
   hasPush = true;
+  snackbar = false;
+  message = "";
   mounted() {
     if (!push.Permission.has()) {
       this.hasPush = false;
     }
   }
   start() {
-    this.isStart = true;
     this.countTime = this.times[0] * 3600 + this.times[1] * 60 + this.times[2];
+    if (this.countTime <= 0) {
+      this.snackbar = true;
+      this.message = "時間が設定されていません。";
+      return;
+    }
+    this.isStart = true;
     this.intervalId = setInterval(() => {
       if (this.countTime === 0) {
         console.log(push.Permission.has());
